@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movies List</title>
+    <script>
+            function ConfirmDelete()
+            {
+              return confirm("Are you sure you want to delete?");
+            }
+    </script>
+</head>
+<body>
+    <table border=1>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Actors</th>
+            <th>Genres</th>
+            <th>Director</th>
+            <th>Plot</th>
+            <th>Rating</th>
+        </tr>
+        {% for item in resource.Items %}
+        <tr>
+            <td>
+                <a href="/movie/{{item.title}}+{{item.year}}" >{{item.title}}</a>
+            </td>
+            <td>{{item.year}}</td>
+        {%if item.info%}
+
+            <td>
+                    {% for actor in item.info.actors %}
+                        {{actor}}
+                        <br>
+                    {% endfor %}
+            </td>
+            <td>
+                    {% for genre in item.info.genres %}
+                        {{genre}}
+                        <br>
+                    {% endfor %}
+            </td>
+            <td>
+                    {% for director in item.info.directors %}
+                        {{director}}
+                    {% endfor %}
+            </td>
+            <td>{{item.info.plot}}</td>
+            <td>{{item.info.rating}}</td>
+            <td>
+                <a onclick="return ConfirmDelete();" href="/deleteMovie/{{item.title}}+{{item.year}}" >Delete</a>
+            </td>
+
+        {%else%}
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <a onclick="return ConfirmDelete();" href="/deleteMovie/{{item.title}}+{{item.year}}" >Delete</a>
+            </td>
+        {%endif%}
+        </tr>
+        {% endfor %}
+      
+    
+    </table>          
+</body>
+</html>

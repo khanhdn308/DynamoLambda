@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{resource.Item.title}}</title>
+</head>
+<body>
+    <table border=1>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Actors</th>
+                <th>Genres</th>
+                <th>Director</th>
+                <th>Plot</th>
+            </tr>
+            
+            <tr>
+                <td>{{resource.Item.title}}</td>
+                <td>{{resource.Item.year}}</td>
+                <td>
+                    {% for actor in resource.Item.info.actors %}
+                        {{actor}}
+                        <br>
+                    {% endfor %}
+                </td>
+                </td>
+                <td>
+                    {% for genre in resource.Item.info.genres %}
+                        {{genre}}
+                        <br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for director in resource.Item.info.directors %}
+                        {{director}}
+                    {% endfor %}
+                </td>
+                <td>{{resource.Item.info.plot}}</td>
+                <td>{{resource.Item.info.rating}}</td>
+                <td>
+                    <a href="/editMovie?title={{resource.Item.title}}&year={{resource.Item.year}}" >edit</a>
+                </td>
+            </tr>            
+        
+        </table>     
+</body>
+</html>
